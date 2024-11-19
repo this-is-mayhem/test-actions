@@ -16,10 +16,19 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y g++ make
 
+      - name: Install Google Test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtest-dev
+          cd /usr/src/gtest
+          sudo cmake .
+          sudo make
+          sudo mv lib/libgtest*.a /usr/lib/
+      
       - name: Build project
         run: |
-          g++ -o main src/main.cpp src/math.cpp
+          g++ -std=c++17 -Wall -o test_math src/math.cpp src/main.cpp -lgtest -lgtest_main -pthread
       
       - name: Run tests
         run: |
-          ./main  # Replace with your actual test commands
+          ./test_math
