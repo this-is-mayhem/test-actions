@@ -1,0 +1,25 @@
+name: Build and Test math
+
+on:
+  push:
+    branches:
+      - feature-math  # Adjust this to your branch name
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++ make
+
+      - name: Build project
+        run: |
+          g++ -o main main.cpp math.cpp
+      
+      - name: Run tests
+        run: |
+          ./main  # Replace with your actual test commands
