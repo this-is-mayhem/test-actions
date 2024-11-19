@@ -18,7 +18,7 @@ jobs:
 
       - name: Build project
         run: |
-          g++ -o main main.cpp math.cpp
+          g++ -o main src/main.cpp src/math.cpp
       
       - name: Run tests
         run: |
